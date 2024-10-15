@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>FlightServiceClient.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">ticket-service-deploy</a> &gt; <a href="../index.html" class="el_bundle">ticket-service-adapter</a> &gt; <a href="index.source.html" class="el_package">com.dt.persistence</a> &gt; <span class="el_source">FlightServiceClient.java</span></div><h1>FlightServiceClient.java</h1><pre class="source lang-java linenums">package com.dt.persistence;
+
+import com.dt.controller.FlightServiceController;
+import com.dt.domain.Flight;
+import com.dt.domain.FlightClass;
+import com.dt.dto.response.FlightResponse;
+import com.dt.dto.response.FlightServiceResponse;
+import com.dt.mapper.FlightTktMapper;
+import com.dt.port.outboundport.IFlightServicePort;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+
+
+import java.util.Optional;
+
+@Component
+@AllArgsConstructor
+public class FlightServiceClient implements IFlightServicePort {
+    FlightTktMapper flightTktMapper;
+
+
+    private FlightServiceController flightServiceController;
+
+    @Override
+    public Optional&lt;FlightClass&gt; getFlightBySrcAndDest(String scr, String desc) {
+<span class="nc" id="L27">       ResponseEntity&lt;FlightServiceResponse&gt; respentity= flightServiceController.getFlightBySrcAndDest(scr, desc);</span>
+<span class="nc bnc" id="L28" title="All 4 branches missed.">       if(respentity.getStatusCode().is2xxSuccessful()&amp;&amp; respentity.getBody()!=null){</span>
+<span class="nc" id="L29">           FlightServiceResponse flightResponse =respentity.getBody();</span>
+<span class="nc" id="L30">           FlightResponse response= flightTktMapper.convertToFlightResponse(flightResponse);</span>
+<span class="nc" id="L31">           FlightClass flight = flightTktMapper.convertToFlight(response);</span>
+<span class="nc" id="L32">           return Optional.of(flight);</span>
+       }
+<span class="nc" id="L34">       return Optional.empty();</span>
+
+    }
+
+    @Override
+    public void updateFlight(FlightClass flightClass) {
+<span class="nc" id="L40">        Flight flight = flightTktMapper.convertToFlight(flightClass);</span>
+<span class="nc" id="L41">        flightServiceController.updateFlight(flight);</span>
+<span class="nc" id="L42">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

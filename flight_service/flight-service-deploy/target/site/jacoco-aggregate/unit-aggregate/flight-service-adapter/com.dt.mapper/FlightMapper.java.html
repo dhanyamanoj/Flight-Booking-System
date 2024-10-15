@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>FlightMapper.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">flight-service-deploy</a> &gt; <a href="../index.html" class="el_bundle">flight-service-adapter</a> &gt; <a href="index.source.html" class="el_package">com.dt.mapper</a> &gt; <span class="el_source">FlightMapper.java</span></div><h1>FlightMapper.java</h1><pre class="source lang-java linenums">package com.dt.mapper;
+
+import com.dt.domain.Flight;
+import com.dt.dto.request.FlightServiceRequest;
+import com.dt.dto.response.FlightServiceResponse;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@NoArgsConstructor
+@Component
+public class FlightMapper {
+    public FlightServiceResponse convertToFlightDTO(Flight flight) {
+<span class="nc" id="L13">        return FlightServiceResponse.builder().id(flight.getId()).source(flight.getSource())</span>
+<span class="nc" id="L14">                .destination(flight.getDestination())</span>
+<span class="nc" id="L15">                .doj(flight.getDoj())</span>
+<span class="nc" id="L16">                .seats(flight.getSeats())</span>
+<span class="nc" id="L17">                .price(flight.getPrice())</span>
+<span class="nc" id="L18">                .status(&quot;200&quot;)</span>
+<span class="nc" id="L19">                .message(&quot;Success&quot;)</span>
+<span class="nc" id="L20">                .build();</span>
+    }
+
+    public Flight convertToFlight(FlightServiceRequest flightServiceRequest) {
+<span class="nc" id="L24">        return Flight.builder()</span>
+<span class="nc" id="L25">                .source(flightServiceRequest.getSource())</span>
+<span class="nc" id="L26">                .destination(flightServiceRequest.getDestination())</span>
+<span class="nc" id="L27">                .seats(flightServiceRequest.getSeats())</span>
+<span class="nc" id="L28">                .doj(flightServiceRequest.getDoj())</span>
+<span class="nc" id="L29">                .price(flightServiceRequest.getPrice())</span>
+<span class="nc" id="L30">                .build();</span>
+    }
+    public Flight convertToFlight(FlightServiceResponse flightServiceResponse) {
+<span class="nc" id="L33">        return Flight.builder()</span>
+<span class="nc" id="L34">                .id(flightServiceResponse.getId())  // Optional, depends if ID is needed</span>
+<span class="nc" id="L35">                .source(flightServiceResponse.getSource())</span>
+<span class="nc" id="L36">                .destination(flightServiceResponse.getDestination())</span>
+<span class="nc" id="L37">                .seats(flightServiceResponse.getSeats())</span>
+<span class="nc" id="L38">                .doj(flightServiceResponse.getDoj())</span>
+<span class="nc" id="L39">                .price(flightServiceResponse.getPrice())</span>
+<span class="nc" id="L40">                .build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

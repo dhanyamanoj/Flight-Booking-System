@@ -1,0 +1,6 @@
+com/dt/domain/Flight.class
+com/dt/service/FlightService.class
+com/dt/exception/FlightException.class
+com/dt/port/inbound/IFlightPort.class
+com/dt/domain/Flight$FlightBuilder.class
+com/dt/port/outbound/IFlightPersistencePort.class

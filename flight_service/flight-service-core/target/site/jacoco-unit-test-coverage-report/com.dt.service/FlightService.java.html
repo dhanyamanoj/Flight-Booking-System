@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FlightService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">flight-service-core</a> &gt; <a href="index.source.html" class="el_package">com.dt.service</a> &gt; <span class="el_source">FlightService.java</span></div><h1>FlightService.java</h1><pre class="source lang-java linenums">package com.dt.service;
+
+import com.dt.domain.Flight;
+import lombok.AllArgsConstructor;
+import com.dt.port.inbound.IFlightPort;
+import org.springframework.stereotype.Service;
+import com.dt.port.outbound.IFlightPersistencePort;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L13">@AllArgsConstructor</span>
+public class FlightService implements IFlightPort {
+
+   private IFlightPersistencePort iflightPersistencePort;
+
+    @Override
+    public Optional&lt;com.dt.domain.Flight&gt; getFlightBySrcAndDest(String source, String destination) {
+
+<span class="nc" id="L21">        return iflightPersistencePort.getFlightBySrcAndDest(source, destination);</span>
+    }
+
+    @Override
+    public List&lt;com.dt.domain.Flight&gt; getAllFlights() {
+<span class="fc" id="L26">        return iflightPersistencePort.getAllFlights();</span>
+    }
+
+    @Override
+    public Optional&lt;com.dt.domain.Flight&gt; createFlight(com.dt.domain.Flight flight) {
+<span class="nc" id="L31">        return iflightPersistencePort.createFlight(flight);</span>
+    }
+
+    @Override
+    public void updateFlight(Flight flight) {
+<span class="nc" id="L36">        iflightPersistencePort.updateFlight(flight);</span>
+<span class="nc" id="L37">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

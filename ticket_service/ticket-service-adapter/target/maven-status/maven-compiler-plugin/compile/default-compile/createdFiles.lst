@@ -1,0 +1,6 @@
+com/dt/controller/TicketServiceController.class
+com/dt/persistence/ITicketRepository.class
+com/dt/mapper/TicketMapper.class
+com/dt/persistence/FlightServiceClient.class
+com/dt/persistence/TicketPersistenceAdapter.class
+com/dt/mapper/FlightTktMapper.class

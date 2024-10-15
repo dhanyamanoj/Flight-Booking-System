@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="flight-service-api" />
+        <module name="ticket-service-adapter" />
+        <module name="ticket-service-core" />
+        <module name="flight-service-adapter" />
+        <module name="ticket-service-api" />
+        <module name="flight-service-core" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="dhanya_flight" options="" />
+      <module name="flight-service-api" options="" />
+      <module name="flight_service" options="" />
+      <module name="ticket-service-api" options="" />
+      <module name="ticket_service" options="" />
+    </option>
+  </component>
+</project>

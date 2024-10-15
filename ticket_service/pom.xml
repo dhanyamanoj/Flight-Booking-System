@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.dt.onebb</groupId>
+        <artifactId>onebb-parent</artifactId>
+        <version>1.0-DEV-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>ticket-service-adapter</module>
+        <module>ticket-service-core</module>
+        <module>ticket-service-api</module>
+        <module>ticket-service-deploy</module>
+    </modules>
+    <groupId>com.dt</groupId>
+    <artifactId>ticket_service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>ticket_service</name>
+    <description>ticket_service</description>
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer/>
+    </developers>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.core.platform>6.4.0-SNAPSHOT</version.core.platform>
+        <version.core.platform.base>6.4.0-SNAPSHOT</version.core.platform.base>
+        <version.core.platform.database.mongo>6.4.0-SNAPSHOT</version.core.platform.database.mongo>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.dt.core.platform</groupId>
+            <artifactId>platform-rest</artifactId>
+            <version>${version.core.platform.base}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dt.core.platform</groupId>
+            <artifactId>platform-boot</artifactId>
+            <version>${version.core.platform}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>platform-aws-sts</artifactId>
+                    <groupId>org.dt.core.platform</groupId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.awspring.cloud</groupId>
+                    <artifactId>spring-cloud-starter-aws-secrets-manager-config</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.dt.core.platform</groupId>
+            <artifactId>platform-unit-test</artifactId>
+            <version>${version.core.platform}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

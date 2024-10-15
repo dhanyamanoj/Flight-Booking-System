@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>TicketMapper.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">ticket-service-deploy</a> &gt; <a href="../index.html" class="el_bundle">ticket-service-adapter</a> &gt; <a href="index.source.html" class="el_package">com.dt.mapper</a> &gt; <span class="el_source">TicketMapper.java</span></div><h1>TicketMapper.java</h1><pre class="source lang-java linenums">package com.dt.mapper;
+
+import lombok.NoArgsConstructor;
+import com.dt.domain.Ticket;
+import com.dt.dto.request.TicketRequest;
+import com.dt.dto.response.TicketResponse;
+import org.springframework.stereotype.Component;
+
+@Component
+@NoArgsConstructor
+public class TicketMapper {
+
+    public Ticket convertToTicket(TicketRequest ticketRequest){
+<span class="nc" id="L14">        return Ticket.builder().ticketno(ticketRequest.getTicketnumber())</span>
+<span class="nc" id="L15">                .fdesn(ticketRequest.getFdesn())</span>
+<span class="nc" id="L16">                .fsrc(ticketRequest.getFsrc())</span>
+<span class="nc" id="L17">                .numberOfSeats(ticketRequest.getNumberOfSeats())</span>
+<span class="nc" id="L18">                .psname(ticketRequest.getPsname())</span>
+<span class="nc" id="L19">                .build();</span>
+    }
+
+    public TicketResponse convertToTicketDTO(Ticket ticket){
+<span class="nc" id="L23">        return  TicketResponse.builder()</span>
+<span class="nc" id="L24">                .ticketno(ticket.getTicketno())</span>
+<span class="nc" id="L25">                .fsrc(ticket.getFsrc())</span>
+<span class="nc" id="L26">                .fdesn(ticket.getFdesn())</span>
+<span class="nc" id="L27">                .numberOfSeats(ticket.getNumberOfSeats())</span>
+<span class="nc" id="L28">                .psname(ticket.getPsname())</span>
+<span class="nc" id="L29">                .status(&quot;SUCCESS&quot;)</span>
+<span class="nc" id="L30">                .message(&quot;Ticket Success&quot;)</span>
+<span class="nc" id="L31">                .build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

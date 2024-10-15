@@ -1,0 +1,4 @@
+com/dt/persistence/IFlightRepository.class
+com/dt/mapper/FlightMapper.class
+com/dt/persistence/FlightPersistenceAdapter.class
+com/dt/controller/FlightServiceController.class

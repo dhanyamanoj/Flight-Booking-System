@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>TicketServiceController.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">ticket-service-deploy</a> &gt; <a href="../index.html" class="el_bundle">ticket-service-adapter</a> &gt; <a href="index.source.html" class="el_package">com.dt.controller</a> &gt; <span class="el_source">TicketServiceController.java</span></div><h1>TicketServiceController.java</h1><pre class="source lang-java linenums">package com.dt.controller;
+
+import com.dt.domain.FlightClass;
+import com.dt.mapper.FlightTktMapper;
+import lombok.AllArgsConstructor;
+import com.dt.dto.response.FlightResponse;
+import com.dt.api.ITicketServiceController;
+import com.dt.domain.Ticket;
+import com.dt.dto.request.TicketRequest;
+import com.dt.dto.response.TicketResponse;
+import com.dt.mapper.TicketMapper;
+import com.dt.port.inboundport.ITicketServicePort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
+
+
+@RestController
+@AllArgsConstructor
+public class TicketServiceController implements ITicketServiceController {
+
+    private TicketMapper ticketMapper;
+    private ITicketServicePort ticketServicePort;
+    private FlightTktMapper flightTktMapper;
+
+
+    @Override
+    public ResponseEntity&lt;FlightResponse&gt; checkFlightBySourceAndDestination(String src, String desn) {
+
+//        // ticket service layer
+//        Optional&lt;FlightServiceResponse&gt; flightBySrcAndDest = flightServiceClient.getFlightBySrcAndDest(src, desn);
+//
+//        // after going to Ticket service layer --&gt; client
+//        return ResponseEntity.ok(flightBySrcAndDest.get());
+
+<span class="nc" id="L39">        final Optional&lt;com.dt.domain.FlightClass&gt; flightBySrcAndDest = ticketServicePort.checkFlightBySourceAndDestination(src, desn);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if(flightBySrcAndDest.isPresent()) {</span>
+<span class="nc" id="L41">            FlightClass flight=flightBySrcAndDest.get();</span>
+<span class="nc" id="L42">            return ResponseEntity.ok(flightTktMapper.convertToFlightDTO(flight));</span>
+        }
+<span class="nc" id="L44">        return ResponseEntity.notFound().build();</span>
+
+    }
+
+    @Override
+    public ResponseEntity&lt;String&gt; createTicket(TicketRequest ticketRequest) {
+<span class="nc" id="L50">        final Ticket ticket = ticketMapper.convertToTicket(ticketRequest);</span>
+<span class="nc" id="L51">        boolean isCreated = ticketServicePort.createTicket(ticket);</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if(!isCreated) {</span>
+<span class="nc" id="L53">            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(&quot;Ticket not created as flight does not exist&quot;);</span>
+        }
+<span class="nc" id="L55">        return ResponseEntity.ok(&quot;Ticket created&quot;);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;String&gt; deleteTicketByNo(@PathVariable(&quot;id&quot;) String id) {
+<span class="nc" id="L60">        boolean isDeleted = ticketServicePort.deleteTicketByNo(id);</span>
+
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (!isDeleted) {</span>
+<span class="nc" id="L63">        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(&quot;Ticket not deleted&quot;);</span>
+        }
+
+<span class="nc" id="L66">        return ResponseEntity.status(HttpStatus.OK).body(&quot;Ticket deleted&quot;);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;TicketResponse&gt; getTicketByNumber(String id) {
+<span class="nc" id="L71">        final Optional&lt;Ticket&gt; ticketByNumber = ticketServicePort.getTicketByNumber(id);</span>
+
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (ticketByNumber.isEmpty()) {</span>
+
+<span class="nc" id="L75">            TicketResponse errorResponse = TicketResponse.builder().status(&quot;NOT_FOUND&quot;).message(&quot;Ticket not found for ticketNo: &quot; + id).build();</span>
+
+<span class="nc" id="L77">            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);</span>
+        }
+
+<span class="nc" id="L80">        return ResponseEntity.ok(ticketMapper.convertToTicketDTO(ticketByNumber.get()));</span>
+    }
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
